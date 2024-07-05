@@ -1,10 +1,7 @@
-import DeployButton from "@/components/DeployButton";
-import AuthButton from "@/components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
 import FetchDataSteps from "@/components/tutorial/FetchDataSteps";
 import Header from "@/components/Header";
 import { redirect } from "next/navigation";
-import Nav from "@/components/Nav";
 
 export default async function ProtectedPage() {
   const supabase = createClient();
@@ -24,7 +21,6 @@ export default async function ProtectedPage() {
           This is a protected page that you can only see as an authenticated
           user
         </div>
-        <Nav/>
       </div>
 
       <div className="flex-1 flex flex-col gap-20 max-w-4xl px-3">
