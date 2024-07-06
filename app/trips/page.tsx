@@ -1,8 +1,19 @@
-import { createClient } from "@/utils/supabase/client";
+// app/page.tsx
+import { createClient } from '../../utils/supabase/server';
+import TripsList from '../../components/TripsList';
 
-export default async function Page(){
-    const supabase = createClient();
-    const {data: trips} = await supabase.from('trips').select();
+export default async function Page() {
+  const supabase = createClient();
+  const { data: trips, error } = await supabase.from('trips').select('*');
 
-    return<pre>{JSON.stringify(trips, null, 2)}</pre>
+  if (error) {
+    console.error('Error fetching trips:', error);
+    return <div>Error loading trips</div>;
+  }
+
+  return (
+    <>
+      <TripsList trips={trips} />
+    </>
+  );
 }
