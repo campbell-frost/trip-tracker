@@ -13,7 +13,7 @@ export default async function Page() {
     return (
         <>
             <h1>hi you have logged in loser</h1>
-            {/* <TripsList trips={trips} /> */}
+            <TripsList trips={trips} />
         </>
     );
 }
