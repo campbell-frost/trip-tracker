@@ -1,19 +1,19 @@
-// app/page.tsx
 import { createClient } from '../../utils/supabase/server';
 import TripsList from '../../components/TripsList';
 
 export default async function Page() {
-  const supabase = createClient();
-  const { data: trips, error } = await supabase.from('trips').select('*');
+    const supabase = createClient();
+    const { data: trips, error } = await supabase.from('trips').select('*');
 
-  if (error) {
-    console.error('Error fetching trips:', error);
-    return <div>Error loading trips</div>;
-  }
+    if (error) {
+        console.error('hi:', error);
+        return <div>Error :() </div>;
+    }
 
-  return (
-    <>
-      <TripsList trips={trips} />
-    </>
-  );
+    return (
+        <>
+            <h1>hi you have logged in loser</h1>
+            {/* <TripsList trips={trips} /> */}
+        </>
+    );
 }
