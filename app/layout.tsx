@@ -1,4 +1,4 @@
-import { GeistSans } from "geist/font/sans";
+import { Inter } from 'next/font/google'
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Nav from "@/components/Nav";
@@ -19,6 +19,8 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
+const inter  = Inter({subsets: ['latin']})
+
 export default async function RootLayout({ children }: RootLayoutProps) {
   const supabase = createClient();
   const {
@@ -26,7 +28,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   } = await supabase.auth.getUser();
 
   return (
-    <html lang="en" className={GeistSans.className}>
+    <html lang="en" className={inter.className}>
       <body className="bg-background text-foreground">
         <ThemeProvider
           attribute="class"
