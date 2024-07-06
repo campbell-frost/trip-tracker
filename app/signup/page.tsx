@@ -1,37 +1,42 @@
+import { headers } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Back from "@/components/Back";
 import Auth from "@/components/Auth";
 
-interface LoginProps {
+interface SignupProps {
   searchParams: { message: string };
 }
 
-export default function Login({ searchParams }: LoginProps) {
-  const signIn = async (formData: FormData) => {
+export default function Signup({ searchParams }: SignupProps) {
+  const signUp = async (formData: FormData) => {
     "use server";
+    const origin = headers().get("origin");
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     const supabase = createClient();
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        emailRedirectTo: `${origin}/auth/callback`,
+      },
     });
     if (error) {
       console.log('error: ', error);
-      return redirect("/login?message=Could not authenticate user");
+      return redirect("/signup?message=Could not create user");
     }
-    return redirect("/trips");
+    return redirect("/login?message=Check email to continue sign up process");
   };
 
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
       <Back />
       <Auth
-        title="Login"
-        description="Don't have an account?"
+        title="Sign Up"
+        description="Already have an account?"
         searchParams={searchParams}
-        onSubmit={signIn}
+        onSubmit={signUp}
       />
     </div>
   );
