@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Nav from "@/components/Nav";
 import { createClient } from "@/utils/supabase/server";
+import { Analytics } from '@vercel/analytics/react';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -35,6 +36,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           <main className="min-h-screen flex flex-col items-center">
             {user && <Nav />}
             {children}
+            <Analytics />
           </main>
         </ThemeProvider>
       </body>
