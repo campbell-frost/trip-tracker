@@ -6,7 +6,7 @@ export async function checkAuth() {
   const { data: user } = await supabase.auth.getUser();
 
   if (user.user?.role !== 'authenticated') {
-    redirect("/login");
+    redirect("/login?message=Not Authenticated :(");
   }
 
   return user;

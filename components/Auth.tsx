@@ -52,7 +52,7 @@ export default function Auth({ title, description, searchParams, onSubmit }: Aut
             {title === "Login" ? "Sign In" : "Sign Up"}
           </SubmitButton>
           {searchParams?.message && (
-            <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
+            <p className="mt-4 p-4 rounded-md bg-foreground/10 text-foreground text-center">
               {searchParams.message}
             </p>
           )}
