@@ -22,7 +22,7 @@ interface RootLayoutProps {
 const inter  = Inter({subsets: ['latin']})
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

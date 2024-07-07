@@ -5,9 +5,11 @@ import { checkAuth } from '@/components/checkAuth';
 
 async function Page() {
   await checkAuth();
-  const supabase = createClient();
-  const { data: trips, error } = await supabase.from('trips').select();
-
+  const supabase = await createClient();
+  const { data: trips, error } = (await supabase
+    .from('trips')
+    .select()
+    .order('id', { ascending: true }));
   if (error) {
     console.error('error: ', error.message, error.details);
     return <div>Error : {error.message} </div>;

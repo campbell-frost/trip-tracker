@@ -14,7 +14,7 @@ export default function Signup({ searchParams }: SignupProps) {
     const origin = headers().get("origin");
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-    const supabase = createClient();
+    const supabase = await createClient();
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -31,7 +31,7 @@ export default function Signup({ searchParams }: SignupProps) {
 
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
-      <Back />
+      <Back url="/" login={true} />
       <Auth
         title="Sign Up"
         description="Already have an account?"

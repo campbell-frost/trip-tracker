@@ -12,7 +12,7 @@ export default function Login({ searchParams }: LoginProps) {
     "use server";
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-    const supabase = createClient();
+    const supabase = await createClient();
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -26,7 +26,7 @@ export default function Login({ searchParams }: LoginProps) {
 
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
-      <Back />
+      <Back url="/" login={true} />
       <Auth
         title="Login"
         description="Don't have an account?"

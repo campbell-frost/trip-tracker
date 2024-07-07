@@ -2,18 +2,23 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { Tables } from "@/types/supabase";
-import { MoreHorizontal } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
+import ActionsCell from "./ActionsCell";
 
 export const columns: ColumnDef<Tables<'trips'>>[] = [
-
+  {
+    accessorKey: "id",
+    header: () => <div className="ml-2">Id</div>,
+    cell: ({ row }) => {
+      const id = row.getValue("id") as string;
+      return <div className="ml-2">{id}</div>
+    }
+  },
   {
     accessorKey: "name",
-    header: () => <div className="ml-2">Name</div>,
+    header: () => <>Name</>,
     cell: ({ row }) => {
       const name = row.getValue("name") as string;
-      return <div className="ml-2">{name}</div>
+      return <>{name}</>
     }
   },
   {
@@ -48,22 +53,7 @@ export const columns: ColumnDef<Tables<'trips'>>[] = [
     header: () => <>Actions</>,
     cell: ({ row }) => {
       const trip = row.original
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem
-              onClick={() => console.log('kiss', trip.id)}>Edit</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
+      return <ActionsCell tripId={trip.id} />
     },
   },
 ]
