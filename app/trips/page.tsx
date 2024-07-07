@@ -1,8 +1,10 @@
 import { createClient } from '../../utils/supabase/server';
 import { columns } from './Columns';
 import { Trips } from './TripsList';
+import { checkAuth } from '@/components/checkAuth';
 
-export default async function Page() {
+async function Page() {
+  await checkAuth();
   const supabase = createClient();
   const { data: trips, error } = await supabase.from('trips').select();
 
@@ -17,3 +19,5 @@ export default async function Page() {
     </div>
   );
 }
+
+export default Page;
