@@ -1,12 +1,10 @@
 import { createClient } from '../../utils/supabase/server';
-import TripsList from '../../components/TripsList';
+import { columns } from './Columns';
+import { Trips } from './TripsList';
 
 export default async function Page() {
   const supabase = createClient();
   const { data: trips, error } = await supabase.from('trips').select();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
 
   if (error) {
     console.error('error: ', error.message, error.details);
@@ -14,9 +12,8 @@ export default async function Page() {
   }
 
   return (
-    <>
-      {/* <h1>Hey, {user?.email}!</h1> */}
-      <TripsList trips={trips} />
-    </>
+    <div className="container mx-auto py-10">
+      <Trips columns={columns} data={trips} />
+    </div>
   );
 }
