@@ -1,22 +1,7 @@
 "use client"
 
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  useReactTable,
-} from "@tanstack/react-table"
-
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-
+import { ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Pagination } from "./Pagination"
 
 interface TripsProps<TData, TValue> {
@@ -25,6 +10,7 @@ interface TripsProps<TData, TValue> {
 }
 
 export function Trips<TData, TValue>({ columns, data, }: TripsProps<TData, TValue>) {
+
   const table = useReactTable({
     data,
     columns,

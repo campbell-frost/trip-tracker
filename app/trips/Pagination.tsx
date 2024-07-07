@@ -1,27 +1,13 @@
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  DoubleArrowLeftIcon,
-  DoubleArrowRightIcon,
-} from "@radix-ui/react-icons"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { ChevronLeftIcon, ChevronRightIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon } from "@radix-ui/react-icons"
 import { Table } from "@tanstack/react-table"
-
 import { Button } from "@/components/ui/button"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 
 interface PaginationProps<TData> {
   table: Table<TData>
 }
 
-export function Pagination<TData>({
-  table,
-}: PaginationProps<TData>) {
+export function Pagination<TData>({ table }: PaginationProps<TData>) {
   return (
     <div className="flex items-center justify-between px-2 py-1">
       <div className="flex items-center space-x-2 ml-1">

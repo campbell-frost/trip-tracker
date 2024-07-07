@@ -1,22 +1,16 @@
 'use client'
+
 import { ColumnDef } from "@tanstack/react-table"
 import { Tables } from "@/types/supabase";
 import { MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
 
 export const columns: ColumnDef<Tables<'trips'>>[] = [
   {
     accessorKey: "id",
     header: () => <div className="ml-4">Id</div>,
-    cell: ({row}) => <div className="ml-4">{row.getValue("id")}</div>
+    cell: ({ row }) => <div className="ml-4">{row.getValue("id")}</div>
   },
   {
     accessorKey: "name",
