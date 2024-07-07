@@ -7,14 +7,14 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
 
 export const columns: ColumnDef<Tables<'trips'>>[] = [
-  {
-    accessorKey: "id",
-    header: () => <div className="ml-4">Id</div>,
-    cell: ({ row }) => <div className="ml-4">{row.getValue("id")}</div>
-  },
+
   {
     accessorKey: "name",
-    header: "Name",
+    header: () => <div className="ml-2">Name</div>,
+    cell: ({ row }) => {
+      const name = row.getValue("name") as string;
+      return <div className="ml-2">{name}</div>
+    }
   },
   {
     accessorKey: "date",
