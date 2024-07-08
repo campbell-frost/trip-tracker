@@ -2,7 +2,7 @@
 
 import { createClient } from "@/utils/supabase/server"
 
-interface UpdateDBProps{
+interface updateDBProps{
   name: string,
   date: string,
   drug: string,
@@ -10,7 +10,7 @@ interface UpdateDBProps{
   id: number
 }
 
-export async function UpdateDB(formData: UpdateDBProps) {
+export async function updateDB(formData: updateDBProps) {
   const supabase = await createClient();
   const { error } = await supabase
     .from('trips')

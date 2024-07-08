@@ -44,7 +44,7 @@ export const columns: ColumnDef<Tables<'trips'>>[] = [
     header: () => <>Actions</>,
     cell: ({ row }) => {
       const trip = row.original
-      return <ActionsCell tripId={trip.id} />
+      return <ActionsCell tripName={trip.name!} tripId={trip.id} />
     },
   },
 ]

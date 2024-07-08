@@ -2,14 +2,14 @@
 
 import { createClient } from "@/utils/supabase/server";
 
-interface AddDbProps {
+interface addToDBProps {
   name: string,
   date: string,
   drug: string,
   people: string,
 }
 
-export async function AddDB(formData: AddDbProps) {
+export async function addToDB(formData: addToDBProps) {
   const supabase = await createClient();
   const { data: user } = await supabase.auth.getUser();
 
