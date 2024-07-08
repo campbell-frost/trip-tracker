@@ -1,7 +1,7 @@
 import { createClient } from '../../utils/supabase/server';
 import { columns } from './Columns';
 import { Trips } from './TripsList';
-import { checkAuth } from '@/components/checkAuth';
+import { checkAuth } from '@/data/checkAuth';
 
 async function Page() {
   await checkAuth();

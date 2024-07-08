@@ -5,8 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { updateDB } from "@/data/Update";
-import { addToDB} from "@/data/Add";
+import { addToDB } from "@/data/Add";
 import { useState } from "react";
+import Link from "next/link";
 
 interface TripFormProps {
   id?: string;
@@ -55,7 +56,7 @@ export default function TripForm({ id, initialName, initialDate, initialDrug, in
   }
 
   const add = async (values: any) => {
-    await addToDB({...values});
+    await addToDB({ ...values });
   }
 
   return (
@@ -129,7 +130,7 @@ export default function TripForm({ id, initialName, initialDate, initialDrug, in
               )}
             />
           </CardContent>
-        </Card>
+        </Card>     
         <div className="flex justify-end">
           <Button type="submit">Submit</Button>
         </div>
