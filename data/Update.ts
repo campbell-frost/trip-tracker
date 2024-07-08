@@ -2,7 +2,7 @@
 
 import { createClient } from "@/utils/supabase/server"
 
-interface SubmitFormProps {
+interface UpdateDB {
   name: string,
   date: string,
   drug: string,
@@ -10,7 +10,7 @@ interface SubmitFormProps {
   id: number
 }
 
-export async function submitForm(formData: SubmitFormProps) {
+export async function UpdateDB(formData: UpdateDB) {
   const supabase = await createClient();
   const { error } = await supabase
     .from('trips')

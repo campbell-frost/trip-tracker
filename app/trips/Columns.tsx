@@ -6,19 +6,11 @@ import ActionsCell from "./ActionsCell";
 
 export const columns: ColumnDef<Tables<'trips'>>[] = [
   {
-    accessorKey: "id",
-    header: () => <div className="ml-2">Id</div>,
-    cell: ({ row }) => {
-      const id = row.getValue("id") as string;
-      return <div className="ml-2">{id}</div>
-    }
-  },
-  {
     accessorKey: "name",
-    header: () => <>Name</>,
+    header: () => <div className="ml-2">Name</div>,
     cell: ({ row }) => {
       const name = row.getValue("name") as string;
-      return <>{name}</>
+      return <div className="ml-2">{name}</div>
     }
   },
   {
@@ -26,8 +18,7 @@ export const columns: ColumnDef<Tables<'trips'>>[] = [
     header: () => <>Date</>,
     cell: ({ row }) => {
       const date = row.getValue("date") as string
-      const formatted = date.slice(0, -9);
-      return <>{formatted}</>
+      return <>{date}</>
     },
   },
   {

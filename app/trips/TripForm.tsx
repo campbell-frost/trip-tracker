@@ -4,24 +4,25 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { submitForm } from "./SubmitForm";
+import { UpdateDB } from "../../data/Update";
 import { useState } from "react";
 
 interface TripFormProps {
-  id: number;
+  id?: string;
   initialName: string;
   initialDate: string;
   initialDrug: string[];
   initialPeople: string[];
+  create: boolean;
 }
 
-export default function TripForm({ id, initialName, initialDate, initialDrug, initialPeople }: TripFormProps) {
+export default function TripForm({ id, initialName, initialDate, initialDrug, initialPeople, create }: TripFormProps) {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const form = useForm({
     defaultValues: {
       name: initialName,
-      date: initialDate.slice(0, -9),
+      date: initialDate,
       drug: initialDrug.join(', '),
       people: initialPeople.join(', '),
     }
@@ -31,9 +32,15 @@ export default function TripForm({ id, initialName, initialDate, initialDrug, in
     try {
       setSuccessMessage(null);
       setSubmitError(null);
-      await submitForm({ ...values, id });
-      setSuccessMessage('Trip successfuly updated!')
-    } catch (error) {
+      if (create) {
+        await add(values);
+        setSuccessMessage('Trip successfuly added!')
+      } else {
+        await update(values);
+        setSuccessMessage('Trip successfuly updated!')
+      }
+    }
+    catch (error) {
       if (error instanceof Error) {
         setSubmitError(error.message);
       } else {
@@ -41,6 +48,14 @@ export default function TripForm({ id, initialName, initialDate, initialDrug, in
       }
     }
   };
+
+  const update = async (values: any) => {
+    await UpdateDB({ ...values, id });
+  }
+
+  const add = async (values: any) => {
+
+  }
 
   return (
     <Form {...form}>

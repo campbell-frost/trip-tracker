@@ -8,8 +8,9 @@ async function Page() {
   const supabase = await createClient();
   const { data: trips, error } = (await supabase
     .from('trips')
-    .select()
-    .order('id', { ascending: true }));
+    .select('*')
+    .order('date', { ascending: true }));
+
   if (error) {
     console.error('error: ', error.message, error.details);
     return <div>Error : {error.message} </div>;

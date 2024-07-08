@@ -5,14 +5,15 @@ import { Button } from "./ui/button";
 
 export default async function AuthButton() {
   const supabase = await createClient();
-
+  
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
+  
   const signOut = async () => {
     "use server";
-
+    
+    const supabase = await createClient();
     await supabase.auth.signOut();
     return redirect("/login");
   };

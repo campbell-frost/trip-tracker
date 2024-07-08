@@ -5,7 +5,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { MoreHorizontal } from "lucide-react"
 
 interface ActionsCellProps {
-  tripId: number;
+  tripId: string;
 }
 
 function ActionsCell({ tripId }: ActionsCellProps) {
