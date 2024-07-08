@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { UpdateDB } from "../../data/Update";
 import { useState } from "react";
+import { AddDB } from "@/data/Add";
 
 interface TripFormProps {
   id?: string;
@@ -54,7 +55,7 @@ export default function TripForm({ id, initialName, initialDate, initialDrug, in
   }
 
   const add = async (values: any) => {
-
+    await AddDB({...values});
   }
 
   return (

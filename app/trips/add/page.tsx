@@ -1,5 +1,4 @@
 import TripForm from "../TripForm";
-import Back from "@/components/Back";
 export default async function Page() {
 
   return (
