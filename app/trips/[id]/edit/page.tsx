@@ -21,9 +21,6 @@ export default async function Edit({ params }: EditProps) {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="w-full max-w-4xl p-3 text-sm">
-        <Back url="/trips" login={false} />
-      </div>
       <div className="w-full max-w-2xl mt-8">
         <TripForm
           create={false}

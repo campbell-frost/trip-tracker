@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { updateDB } from "@/data/Update";
 import { addToDB } from "@/data/Add";
 import { useState } from "react";
-import Link from "next/link";
+import Back from "@/components/Back";
 
 interface TripFormProps {
   id?: string;
@@ -130,12 +130,18 @@ export default function TripForm({ id, initialName, initialDate, initialDrug, in
               )}
             />
           </CardContent>
-        </Card>     
-        <div className="flex justify-end">
-          <Button type="submit">Submit</Button>
-        </div>
+          <CardContent>
+            <div className="flex justify-between">
+              <div className="flex justify-start">
+                <Back url="/trips" login={false} />
+              </div>
+              <div className="flex justify-end">
+                <Button type="submit">Submit</Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
         <div className="flex justify-center">
-
           {submitError
             ? <div className="text-red-500">{submitError}</div>
             : <div className="text-green-500">{successMessage}</div>

@@ -6,11 +6,11 @@ interface BackProps {
 }
 
 export default function Back({ url, login }: BackProps) {
-  const pos = login ? "top-8" : "top-20"
+  const pos = login && "absolute left-8 top-8 py-2 px-4"
   return (
     <Link
       href={url}
-      className={`absolute left-8 ${pos} py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm`}    >
+      className={`${pos} rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm`}    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
