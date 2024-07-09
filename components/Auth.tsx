@@ -1,7 +1,8 @@
 'use client';
 
-import { SubmitButton } from "./SubmitButton";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import React from 'react';
+import { SubmitButton } from './SubmitButton';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 
 interface AuthProps {
   title: string;
@@ -15,17 +16,26 @@ export default function Auth({ title, description, searchParams, onSubmit }: Aut
     <Card>
       <CardHeader>
         <CardTitle>{title}</CardTitle>
-        <CardDescription>{description} - 
-          {title === 'Login'
-            ?
-            <a href="/signup" className="font-bold hover:text-blue-400"> Sign up</a>
-            :
-            <a href="/login" className="font-bold hover:underline"> Log in</a>
-          }
+        <CardDescription>
+          {description} -
+          {title === 'Login' ? (
+            <a href="/signup" className="font-bold hover:text-blue-400">
+              {' '}
+              Sign up
+            </a>
+          ) : (
+            <a href="/login" className="font-bold hover:underline">
+              {' '}
+              Log in
+            </a>
+          )}
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground" action={onSubmit}>
+        <form
+          className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
+          action={onSubmit}
+        >
           <label className="text-md" htmlFor="email">
             Email
           </label>
@@ -47,9 +57,9 @@ export default function Auth({ title, description, searchParams, onSubmit }: Aut
           />
           <SubmitButton
             className="bg-blue-600 hover:bg-blue-700 rounded-md px-4 py-2 text-foreground mb-2"
-            pendingText={title === "Login" ? "Signing In..." : "Signing Up..."}
+            pendingText={title === 'Login' ? 'Signing In...' : 'Signing Up...'}
           >
-            {title === "Login" ? "Sign In" : "Sign Up"}
+            {title === 'Login' ? 'Sign In' : 'Sign Up'}
           </SubmitButton>
           {searchParams?.message && (
             <p className="mt-4 p-4 rounded-md bg-foreground/10 text-foreground text-center">

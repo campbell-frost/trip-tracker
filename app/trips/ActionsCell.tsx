@@ -1,10 +1,16 @@
-'use client'
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { MoreHorizontal } from "lucide-react"
-import { Alert } from '@/components/Alert'
+'use client';
+import React from 'react'
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { MoreHorizontal } from 'lucide-react';
+import { Alert } from '@/components/Alert';
 
 interface ActionsCellProps {
   tripId: string;
@@ -17,11 +23,11 @@ export default function ActionsCell({ tripId, tripName }: ActionsCellProps) {
 
   const handleEdit = () => {
     router.push(`/trips/${tripId}/edit`);
-  }
+  };
 
   const handleDelete = () => {
     setIsAlertOpen(true);
-  }
+  };
 
   return (
     <>
@@ -39,5 +45,5 @@ export default function ActionsCell({ tripId, tripName }: ActionsCellProps) {
       </DropdownMenu>
       <Alert tripId={tripId} tripName={tripName} isOpen={isAlertOpen} onOpenChange={setIsAlertOpen} />
     </>
-  )
+  );
 }

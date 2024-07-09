@@ -1,7 +1,8 @@
-import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
-import Back from "@/components/Back";
-import Auth from "@/components/Auth";
+import React from 'react';
+import { createClient } from '@/utils/supabase/server';
+import { redirect } from 'next/navigation';
+import Back from '@/components/Back';
+import Auth from '@/components/Auth';
 
 interface LoginProps {
   searchParams: { message: string };
@@ -9,9 +10,9 @@ interface LoginProps {
 
 export default function Login({ searchParams }: LoginProps) {
   const signIn = async (formData: FormData) => {
-    "use server";
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
+    'use server';
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
     const supabase = await createClient();
     const { error } = await supabase.auth.signInWithPassword({
       email,
@@ -19,9 +20,9 @@ export default function Login({ searchParams }: LoginProps) {
     });
     if (error) {
       console.log('error: ', error);
-      return redirect("/login?message=Could not authenticate user");
+      return redirect('/login?message=Could not authenticate user');
     }
-    return redirect("/trips");
+    return redirect('/trips');
   };
 
   return (

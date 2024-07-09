@@ -1,5 +1,3 @@
-'use server'
-
 import { createClient } from "@/utils/supabase/server";
 
 interface addTripProps {
@@ -20,7 +18,7 @@ export async function addTrip(formData: addTripProps) {
       date: formData.date,
       drug: formData.drug.split(',').map(item => item.trim()),
       people: formData.people.split(',').map(item => item.trim()),
-      user_id: user.user?.id 
+      user_id: user.user?.id
     })
   if (error) {
     throw new Error(`Error adding data: ${error.message}`);

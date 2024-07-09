@@ -1,5 +1,3 @@
-'use server'
-
 import { createClient } from "@/utils/supabase/server"
 
 interface updateTripProps{
@@ -7,7 +5,7 @@ interface updateTripProps{
   date: string,
   drug: string,
   people: string,
-  id: number
+  id: string,
 }
 
 export async function updateTrip(formData: updateTripProps) {

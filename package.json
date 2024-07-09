@@ -36,9 +36,16 @@
     "typescript": "5.3.3"
   },
   "devDependencies": {
+    "@eslint/js": "^9.6.0",
     "@types/node": "20.11.5",
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
-    "encoding": "^0.1.13"
+    "encoding": "^0.1.13",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.34.3",
+    "globals": "^15.8.0",
+    "prettier": "3.3.2",
+    "typescript-eslint": "^7.16.0"
   }
 }

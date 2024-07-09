@@ -1,5 +1,7 @@
+'use server' 
+
 import { Database } from '@/types/supabase'
-import { createServerClient, type CookieOptions } from '@supabase/ssr'
+import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
 export async function createClient() {

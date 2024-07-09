@@ -1,10 +1,22 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ChevronLeftIcon, ChevronRightIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon } from "@radix-ui/react-icons"
-import { Table } from "@tanstack/react-table"
-import { Button } from "@/components/ui/button"
+import React from 'react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  DoubleArrowLeftIcon,
+  DoubleArrowRightIcon,
+} from '@radix-ui/react-icons';
+import { Table } from '@tanstack/react-table';
+import { Button } from '@/components/ui/button';
 
 interface PaginationProps<TData> {
-  table: Table<TData>
+  table: Table<TData>;
 }
 
 export function Pagination<TData>({ table }: PaginationProps<TData>) {
@@ -15,7 +27,7 @@ export function Pagination<TData>({ table }: PaginationProps<TData>) {
         <Select
           value={`${table.getState().pagination.pageSize}`}
           onValueChange={(value) => {
-            table.setPageSize(Number(value))
+            table.setPageSize(Number(value));
           }}
         >
           <SelectTrigger className="h-8 w-[70px]">
@@ -32,8 +44,7 @@ export function Pagination<TData>({ table }: PaginationProps<TData>) {
       </div>
       <div className="flex items-center space-x-2">
         <div className="flex w-[100px] items-center text-sm font-medium">
-          Page {table.getState().pagination.pageIndex + 1} of{" "}
-          {table.getPageCount()}
+          Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
         </div>
         <div className="flex items-center space-x-2">
           <Button
@@ -75,5 +86,5 @@ export function Pagination<TData>({ table }: PaginationProps<TData>) {
         </div>
       </div>
     </div>
-  )
+  );
 }

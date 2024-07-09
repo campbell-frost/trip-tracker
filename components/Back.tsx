@@ -1,4 +1,5 @@
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
 interface BackProps {
   url: string;
@@ -6,11 +7,12 @@ interface BackProps {
 }
 
 export default function Back({ url, login }: BackProps) {
-  const pos = login && "absolute left-8 top-8 py-2 px-4"
+  const pos = login && 'absolute left-8 top-8 py-2 px-4';
   return (
     <Link
       href={url}
-      className={`${pos} rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm`}    >
+      className={`${pos} rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm`}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -24,8 +26,8 @@ export default function Back({ url, login }: BackProps) {
         className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1"
       >
         <polyline points="15 18 9 12 15 6" />
-      </svg>{" "}
+      </svg>{' '}
       Back
-    </Link >
-  )
+    </Link>
+  );
 }

@@ -1,7 +1,7 @@
-import Back from "@/components/Back";
-import { createClient } from "@/utils/supabase/server";
-import TripForm from "../../TripForm";
-import { checkAuth } from "@/data/checkAuth";
+import React from 'react';
+import { createClient } from '@/utils/supabase/server';
+import TripForm from '../../TripForm';
+import { checkAuth } from '@/data/checkAuth';
 
 interface EditProps {
   params: { id: string };
@@ -10,10 +10,18 @@ interface EditProps {
 export default async function Edit({ params }: EditProps) {
   checkAuth();
   const supabase = await createClient();
-  const { data: trip, error } = await supabase.from("trips").select('*').eq('id', params.id).single();
+  const { data: trip, error } = await supabase
+    .from('trips')
+    .select('*')
+    .eq('id', params.id)
+    .single();
 
   if (error) {
-    return <div className="flex justify-center items-center min-h-100">Error loading trip data: {error.message}</div>;
+    return (
+      <div className="flex justify-center items-center min-h-100">
+        Error loading trip data: {error.message}
+      </div>
+    );
   }
   if (!trip) {
     return <div>No trip found</div>;

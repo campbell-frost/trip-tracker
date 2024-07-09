@@ -1,22 +1,35 @@
-"use client"
+'use client';
 
-import { ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Pagination } from "./Pagination"
+import React from 'react';
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  useReactTable,
+} from '@tanstack/react-table';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { Pagination } from './Pagination';
 
 interface TripsProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
 }
 
-export function Trips<TData, TValue>({ columns, data, }: TripsProps<TData, TValue>) {
-
+export function Trips<TData, TValue>({ columns, data }: TripsProps<TData, TValue>) {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-  })
+  });
 
   return (
     <div className="w-full flex justify-center">
@@ -31,12 +44,9 @@ export function Trips<TData, TValue>({ columns, data, }: TripsProps<TData, TValu
                       <TableHead key={header.id}>
                         {header.isPlaceholder
                           ? null
-                          : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          : flexRender(header.column.columnDef.header, header.getContext())}
                       </TableHead>
-                    )
+                    );
                   })}
                 </TableRow>
               ))}
@@ -44,10 +54,7 @@ export function Trips<TData, TValue>({ columns, data, }: TripsProps<TData, TValu
             <TableBody>
               {table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
-                  >
+                  <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -71,6 +78,5 @@ export function Trips<TData, TValue>({ columns, data, }: TripsProps<TData, TValu
         </div>
       </div>
     </div>
-
-  )
+  );
 }

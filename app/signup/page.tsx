@@ -1,8 +1,9 @@
-import { headers } from "next/headers";
-import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
-import Back from "@/components/Back";
-import Auth from "@/components/Auth";
+import React from 'react';
+import { headers } from 'next/headers';
+import { createClient } from '@/utils/supabase/server';
+import { redirect } from 'next/navigation';
+import Back from '@/components/Back';
+import Auth from '@/components/Auth';
 
 interface SignupProps {
   searchParams: { message: string };
@@ -10,10 +11,10 @@ interface SignupProps {
 
 export default function Signup({ searchParams }: SignupProps) {
   const signUp = async (formData: FormData) => {
-    "use server";
-    const origin = headers().get("origin");
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
+    'use server';
+    const origin = headers().get('origin');
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
     const supabase = await createClient();
     const { error } = await supabase.auth.signUp({
       email,
@@ -24,9 +25,9 @@ export default function Signup({ searchParams }: SignupProps) {
     });
     if (error) {
       console.log('error: ', error);
-      return redirect("/signup?message=Could not create user");
+      return redirect('/signup?message=Could not create user');
     }
-    return redirect("/login?message=Check email to continue sign up process");
+    return redirect('/login?message=Check email to continue sign up process');
   };
 
   return (

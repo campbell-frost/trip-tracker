@@ -1,13 +1,22 @@
 'use client';
-import { useForm } from "react-hook-form";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { updateTrip } from "@/data/updateTrip";
-import { addTrip } from "@/data/addTrip";
-import { useState } from "react";
-import Back from "@/components/Back";
+
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { updateTrip } from '@/data/updateTrip';
+import { addTrip } from '@/data/addTrip';
+import { useState } from 'react';
+import Back from '@/components/Back';
 
 interface TripFormProps {
   id?: string;
@@ -18,31 +27,43 @@ interface TripFormProps {
   create: boolean;
 }
 
-export default function TripForm({ id, initialName, initialDate, initialDrug, initialPeople, create }: TripFormProps) {
+interface TripFormValues {
+  name: string;
+  date: string;
+  drug: string;
+  people: string;
+}
+export default function TripForm({
+  id,
+  initialName,
+  initialDate,
+  initialDrug,
+  initialPeople,
+  create,
+}: TripFormProps) {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const form = useForm({
+  const form = useForm<TripFormValues>({
     defaultValues: {
       name: initialName,
       date: initialDate,
       drug: initialDrug.join(', '),
       people: initialPeople.join(', '),
-    }
+    },
   });
 
-  const onSubmit = async (values: any) => {
+  const onSubmit = async (values: TripFormValues) => {
     try {
       setSuccessMessage(null);
       setSubmitError(null);
       if (create) {
         await add(values);
-        setSuccessMessage('Trip successfuly added!')
+        setSuccessMessage('Trip successfully added!');
       } else {
         await update(values);
-        setSuccessMessage('Trip successfuly updated!')
+        setSuccessMessage('Trip successfully updated!');
       }
-    }
-    catch (error) {
+    } catch (error) {
       if (error instanceof Error) {
         setSubmitError(error.message);
       } else {
@@ -51,14 +72,17 @@ export default function TripForm({ id, initialName, initialDate, initialDrug, in
     }
   };
 
-  const update = async (values: any) => {
-    await updateTrip({ ...values, id });
-  }
+  const update = async (values: TripFormValues) => {
+    if (id) {
+      await updateTrip({ ...values, id });
+    } else {
+      throw new Error('ID is required for updating a trip');
+    }
+  };
 
-  const add = async (values: any) => {
-    await addTrip({ ...values });
-  }
-
+  const add = async (values: TripFormValues) => {
+    await addTrip(values);
+  };
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
@@ -71,10 +95,7 @@ export default function TripForm({ id, initialName, initialDate, initialDrug, in
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder={initialName}
-                      {...field}
-                    />
+                    <Input placeholder={initialName} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -87,11 +108,7 @@ export default function TripForm({ id, initialName, initialDate, initialDrug, in
                 <FormItem>
                   <FormLabel>Date</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      type="date"
-                      placeholder={initialDate}
-                    />
+                    <Input {...field} type="date" placeholder={initialDate} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -104,10 +121,7 @@ export default function TripForm({ id, initialName, initialDate, initialDrug, in
                 <FormItem>
                   <FormLabel>Drugs</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder={initialDrug.join(', ')}
-                      {...field}
-                    />
+                    <Input placeholder={initialDrug.join(', ')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -120,10 +134,7 @@ export default function TripForm({ id, initialName, initialDate, initialDrug, in
                 <FormItem>
                   <FormLabel>People</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder={initialPeople.join(', ')}
-                      {...field}
-                    />
+                    <Input placeholder={initialPeople.join(', ')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -142,10 +153,11 @@ export default function TripForm({ id, initialName, initialDate, initialDrug, in
           </CardContent>
         </Card>
         <div className="flex justify-center">
-          {submitError
-            ? <div className="text-red-500">{submitError}</div>
-            : <div className="text-green-500">{successMessage}</div>
-          }
+          {submitError ? (
+            <div className="text-red-500">{submitError}</div>
+          ) : (
+            <div className="text-green-500">{successMessage}</div>
+          )}
         </div>
       </form>
     </Form>

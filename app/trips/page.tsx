@@ -1,3 +1,6 @@
+'use server'
+
+import React from 'react';
 import { createClient } from '../../utils/supabase/server';
 import { columns } from './Columns';
 import { Trips } from './TripsList';
@@ -6,10 +9,10 @@ import { checkAuth } from '@/data/checkAuth';
 async function Page() {
   await checkAuth();
   const supabase = await createClient();
-  const { data: trips, error } = (await supabase
+  const { data: trips, error } = await supabase
     .from('trips')
     .select('*')
-    .order('date', { ascending: true }));
+    .order('date', { ascending: true });
 
   if (error) {
     console.error('error: ', error.message, error.details);
