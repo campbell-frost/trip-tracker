@@ -4,8 +4,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { updateDB } from "@/data/Update";
-import { addToDB } from "@/data/Add";
+import { updateTrip } from "@/data/updateTrip";
+import { addTrip } from "@/data/addTrip";
 import { useState } from "react";
 import Back from "@/components/Back";
 
@@ -52,11 +52,11 @@ export default function TripForm({ id, initialName, initialDate, initialDrug, in
   };
 
   const update = async (values: any) => {
-    await updateDB({ ...values, id });
+    await updateTrip({ ...values, id });
   }
 
   const add = async (values: any) => {
-    await addToDB({ ...values });
+    await addTrip({ ...values });
   }
 
   return (

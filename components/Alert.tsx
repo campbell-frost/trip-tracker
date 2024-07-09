@@ -1,5 +1,5 @@
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
-import { deleteFromDB } from "@/data/Delete";
+import { deleteTrip } from "@/data/deleteTrip";
 
 interface AlertProps {
   tripId: string;
@@ -10,7 +10,7 @@ interface AlertProps {
 
 export function Alert({ tripId, tripName, isOpen, onOpenChange }: AlertProps) {
   const handleDelete = async () => {
-    await deleteFromDB({ id: tripId });
+    await deleteTrip({ id: tripId });
     onOpenChange(false);
   }
 

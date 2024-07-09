@@ -2,11 +2,11 @@
 
 import { createClient } from "@/utils/supabase/server";
 
-interface deleteFromDBProps {
+interface deleteTripProps {
   id: string;
 }
 
-export async function deleteFromDB(formData: deleteFromDBProps) {
+export async function deleteTrip(formData: deleteTripProps) {
   const supabase = await createClient();
 
   const { error } = await supabase
