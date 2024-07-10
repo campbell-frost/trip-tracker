@@ -51,7 +51,7 @@ export default function TripForm({
       people: initialPeople.join(', '),
     },
   });
-
+  
   const onSubmit = async (values: TripFormValues) => {
     try {
       setSuccessMessage(null);
@@ -64,10 +64,11 @@ export default function TripForm({
         setSuccessMessage('Trip successfully updated!');
       }
     } catch (error) {
+      const action = create ? 'adding' : 'updating';
       if (error instanceof Error) {
-        setSubmitError(error.message);
+        setSubmitError(`An error occurred while ${action} the trip: ${error.message}`);
       } else {
-        setSubmitError('An unknown error occurred');
+        setSubmitError(`An unknown error occurred while ${action} the trip`);
       }
     }
   };
