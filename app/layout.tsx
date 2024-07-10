@@ -2,8 +2,6 @@ import React from 'react'
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
-import Nav from '@/components/Nav';
-import { createClient } from '@/utils/supabase/server';
 import { Analytics } from '@vercel/analytics/react';
 
 const defaultUrl = process.env.VERCEL_URL
@@ -23,11 +21,6 @@ interface RootLayoutProps {
 const inter = Inter({ subsets: ['latin'] });
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
   return (
     <html lang="en" className={inter.className}>
       <body className="bg-background text-foreground">
@@ -38,7 +31,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           disableTransitionOnChange
         >
           <main className="min-h-screen flex flex-col items-center">
-            {user && <Nav />}
             {children}
             <Analytics />
           </main>
