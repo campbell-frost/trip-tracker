@@ -1,11 +1,13 @@
-import { createClient } from "@/utils/supabase/server"
+'use server';
 
-interface updateTripProps{
-  name: string,
-  date: string,
-  drug: string,
-  people: string,
-  id: string,
+import { createClient } from '@/utils/supabase/server';
+
+interface updateTripProps {
+  name: string;
+  date: string;
+  drug: string;
+  people: string;
+  id: string;
 }
 
 export async function updateTrip(formData: updateTripProps) {
@@ -15,10 +17,10 @@ export async function updateTrip(formData: updateTripProps) {
     .update({
       name: formData.name,
       date: formData.date,
-      drug: formData.drug.split(',').map(item => item.trim()),
-      people: formData.people.split(',').map(item => item.trim())
+      drug: formData.drug.split(',').map((item) => item.trim()),
+      people: formData.people.split(',').map((item) => item.trim()),
     })
-    .eq('id', formData.id)
+    .eq('id', formData.id);
 
   if (error) {
     throw new Error(`Error uploading data: ${error.message}`);

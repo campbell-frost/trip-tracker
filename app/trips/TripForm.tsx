@@ -51,7 +51,7 @@ export default function TripForm({
       people: initialPeople.join(', '),
     },
   });
-  
+
   const onSubmit = async (values: TripFormValues) => {
     try {
       setSuccessMessage(null);

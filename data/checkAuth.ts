@@ -1,3 +1,5 @@
+'use server';
+
 import { redirect } from 'next/navigation';
 import { createClient } from '../utils/supabase/server';
 
@@ -6,7 +8,7 @@ export async function checkAuth() {
   const { data: user } = await supabase.auth.getUser();
 
   if (user.user?.role !== 'authenticated') {
-    redirect("/login?message=Not Authenticated :(");
+    redirect('/login?message=Not Authenticated :(');
   }
 
   return user;
