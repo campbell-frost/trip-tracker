@@ -3,7 +3,6 @@
 import { createClient } from "@/utils/supabase/server";
 
 export default async function getTrips(){
-
     const supabase = await createClient();
     const { data: trips, error } = await supabase
     .from('trips')

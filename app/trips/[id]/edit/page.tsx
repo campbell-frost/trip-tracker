@@ -23,6 +23,5 @@ export default async function Edit({ params }: EditProps) {
         initialPeople={trip.people || []}
       />
     </Suspense>
-
-  );
+    );
 }

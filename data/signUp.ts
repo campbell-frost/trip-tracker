@@ -1,8 +1,8 @@
 'use server';
 
-import { createClient } from "@/utils/supabase/server";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+import { createClient } from '@/utils/supabase/server';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 export default async function signUp(formData: FormData) {
   const origin = headers().get('origin');
@@ -21,4 +21,4 @@ export default async function signUp(formData: FormData) {
     return redirect('/signup?message=Could not create user');
   }
   return redirect('/login?message=Check email to continue sign up process');
-};
+}
