@@ -1,17 +1,19 @@
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface BackProps {
-  url: string;
   login: boolean;
 }
 
-export default function Back({ url, login }: BackProps) {
+export default function Back({ login }: BackProps) {
+  const router = useRouter();
   const pos = login && 'absolute left-8 top-8 py-2 px-4';
+  
   return (
-    <Link
-      href={url}
-      className={`${pos} rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm`}
+    <div
+    onClick={router.back}  
+    className={`${pos} rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -28,6 +30,6 @@ export default function Back({ url, login }: BackProps) {
         <polyline points="15 18 9 12 15 6" />
       </svg>{' '}
       Back
-    </Link>
+    </div>
   );
 }
