@@ -15,7 +15,7 @@ interface AuthProps {
 export default function Auth({ title, description, searchParams, onSubmit }: AuthProps) {
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
-      <Back url="/" login={true} />
+      <Back login={true} />
       <Card>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
