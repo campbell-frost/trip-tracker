@@ -1,20 +1,19 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { checkAuth } from '@/data/checkAuth';
-import TripForm from '../TripForm';
+import TripForm from '../../../components/TripForm';
+import FormSkeleton from '@/components/skeletons/FormSkeleton';
 export default async function Page() {
   checkAuth();
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="w-full max-w-2xl mt-8">
-        <TripForm
+    <Suspense fallback={<FormSkeleton />}>
+          <TripForm
           create={true}
           initialName={''}
           initialDate={''}
           initialDrug={[]}
           initialPeople={[]}
         />
-      </div>
-    </div>
+    </Suspense>
   );
 }

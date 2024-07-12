@@ -1,17 +1,19 @@
 'use server'
 
-import React from 'react';
-import { columns } from './Columns';
-import { Trips } from './TripsList';
+import React, { Suspense } from 'react';
+import { columns } from '../../components/Columns';
+import { Trips } from '../../components/TripsList';
 import { checkAuth } from '@/data/checkAuth';
 import getTrips from '@/data/getTrips';
+import TripsTableSkeleton from '@/components/skeletons/TripsTableSkeleton';
 
 export default async function Page() {
   await checkAuth();
   const trips = await getTrips();
+  
   return (
-    <div className="container mx-auto py-10">
+    <Suspense fallback={<TripsTableSkeleton />}>
       <Trips columns={columns} data={trips} />
-    </div>
+    </Suspense>
   );
 }
