@@ -9,7 +9,9 @@ export default function Nav() {
     <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
       <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
         <div className="flex items-center">
-          <h1 className="text-3xl font-semibold mr-4">Trip Tracker</h1>
+          <h1 className="text-3xl font-semibold mr-4">
+            <Link href="/">Trip Tracker</Link>
+          </h1>
           <div className="mr-4">
             <Button variant={'ghost'}>
               <Link href="/dashboard">Dashboard</Link>

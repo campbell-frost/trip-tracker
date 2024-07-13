@@ -15,14 +15,14 @@ interface AuthProps {
 export default function Auth({ title, description, searchParams, onSubmit }: AuthProps) {
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
-      <Back login={true} />
+      <Back url='/' login={true} />
       <Card>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
           <CardDescription>
             {description} -
             {title === 'Login' ? (
-              <a href="/signup" className="font-bold hover:text-blue-400">
+              <a href="/signup" className="font-bold  hover:underline">
                 {' '}
                 Sign up
               </a>

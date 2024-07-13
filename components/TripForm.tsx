@@ -147,7 +147,7 @@ export default function TripForm({
               <CardContent>
                 <div className="flex justify-between">
                   <div className="flex justify-start">
-                    <Back login={false} />
+                    <Back url='/trips'login={false} />
                   </div>
                   <div className="flex justify-end">
                     <Button type="submit">Submit</Button>
