@@ -12,19 +12,20 @@ export default function Nav() {
           <h1 className="text-3xl font-semibold mr-4">
             <Link href="/">Trip Tracker</Link>
           </h1>
-          <div className="mr-4">
-            <Button variant={'ghost'}>
-              <Link href="/dashboard">Dashboard</Link>
+          <Link href="/dashboard">
+            <Button variant={'ghost'} className="pr-4 ml-5">
+              Dashboard
             </Button>
-          </div>
-          <div className="mr-4">
-            <Button variant={'ghost'}>
-              <Link href="/trips">View Trips </Link>
+          </Link>
+
+          <Link href="/trips">
+            <Button variant={'ghost'} className="pr-4">
+              View Trips
             </Button>
-          </div>
-          <Button variant={'ghost'}>
-            <Link href="/trips/add">Add Trip</Link>
-          </Button>
+          </Link>
+          <Link href="/trips/add">
+            <Button variant={'ghost'}>Add Trip</Button>
+          </Link>
         </div>
         <div className="text-end flex">
           <ThemeToggle />
