@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3000';
+  : 'https://triptracker.campbellfrost.net';
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
