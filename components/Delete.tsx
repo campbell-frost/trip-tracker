@@ -11,16 +11,18 @@ import {
 } from '@/components/ui/alert-dialog';
 import { deleteTrip } from '@/data/deleteTrip';
 
-interface AlertProps {
-  tripId: string;
-  tripName: string;
+interface DeleteProps {
+  trip: {
+    id: string;
+    name: string
+  }
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
-export function Alert({ tripId, tripName, isOpen, onOpenChange }: AlertProps) {
+export function Delete({ trip, isOpen, onOpenChange }: DeleteProps) {
   const handleDelete = async () => {
-    await deleteTrip({ id: tripId });
+    await deleteTrip({ id: trip.id });
     onOpenChange(false);
   };
 
@@ -28,7 +30,7 @@ export function Alert({ tripId, tripName, isOpen, onOpenChange }: AlertProps) {
     <AlertDialog open={isOpen} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure you want to delete {tripName}?</AlertDialogTitle>
+          <AlertDialogTitle>Are you sure you want to delete {trip.name}?</AlertDialogTitle>
           <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

@@ -18,14 +18,6 @@ export default function Nav() {
             </Button>
           </Link>
 
-          <Link href="/trips">
-            <Button variant={'ghost'} className="pr-4">
-              View Trips
-            </Button>
-          </Link>
-          <Link href="/trips/add">
-            <Button variant={'ghost'}>Add Trip</Button>
-          </Link>
         </div>
         <div className="text-end flex">
           <ThemeToggle />

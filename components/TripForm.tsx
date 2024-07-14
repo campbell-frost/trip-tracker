@@ -12,20 +12,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { updateTrip } from '@/data/updateTrip';
-import { addTrip } from '@/data/addTrip';
 import { useState } from 'react';
-import Back from '@/components/Back';
-
-interface TripFormProps {
-  id?: string;
-  initialName: string;
-  initialDate: string;
-  initialDrug: string[];
-  initialPeople: string[];
-  create: boolean;
-}
 
 interface TripFormValues {
   name: string;
@@ -33,6 +20,17 @@ interface TripFormValues {
   drug: string;
   people: string;
 }
+interface TripFormProps {
+  id?: string;
+  initialName: string;
+  initialDate: string;
+  initialDrug: string[];
+  initialPeople: string[];
+  create: boolean;
+  onSubmit: (values: TripFormValues) => Promise<void>;
+  onCancel: () => void;
+}
+
 export default function TripForm({
   id,
   initialName,
@@ -40,8 +38,9 @@ export default function TripForm({
   initialDrug,
   initialPeople,
   create,
-}: TripFormProps) {
-  const [submitError, setSubmitError] = useState<string | null>(null);
+  onSubmit,
+  onCancel,
+}: TripFormProps) {  const [submitError, setSubmitError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const form = useForm<TripFormValues>({
     defaultValues: {
@@ -52,109 +51,89 @@ export default function TripForm({
     },
   });
 
-  const onSubmit = async (values: TripFormValues) => {
+  const handleSubmit = async (values: TripFormValues) => {
     try {
       setSuccessMessage(null);
       setSubmitError(null);
-      if (create) {
-        await add(values);
-        setSuccessMessage('Trip successfully added!');
-      } else {
-        await update(values);
-        setSuccessMessage('Trip successfully updated!');
-      }
+      await onSubmit(values);
+      setSuccessMessage(create ? 'Trip successfully added!' : 'Trip successfully updated!');
     } catch (error) {
       const action = create ? 'adding' : 'updating';
       if (error instanceof Error) {
-        setSubmitError(`An error occurred while ${action} the trip: ${error.message}`);
+        setSubmitError(`An error occurred while ${action} the trip: ${error.message}, ${error.cause} ${error.name} ${error.stack}`);
       } else {
         setSubmitError(`An unknown error occurred while ${action} the trip`);
       }
     }
   };
 
-  const update = async (values: TripFormValues) => {
-    if (id) {
-      await updateTrip({ ...values, id });
-    } else {
-      throw new Error('ID is required for updating a trip');
-    }
-  };
-
-  const add = async (values: TripFormValues) => {
-    await addTrip(values);
-  };
   return (
     <div className="flex flex-col items-center">
       <div className="w-full max-w-2xl mt-8">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
-            <Card>
-              <CardContent className="grid grid-cols-2 gap-4 p-6">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder={initialName} {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="date"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Date</FormLabel>
-                      <FormControl>
-                        <Input {...field} type="date" placeholder={initialDate} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="drug"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Drugs</FormLabel>
-                      <FormControl>
-                        <Input placeholder={initialDrug.join(', ')} {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="people"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>People</FormLabel>
-                      <FormControl>
-                        <Input placeholder={initialPeople.join(', ')} {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </CardContent>
-              <CardContent>
-                <div className="flex justify-between">
-                  <div className="flex justify-start">
-                    <Back url='/trips'login={false} />
-                  </div>
-                  <div className="flex justify-end">
-                    <Button type="submit">Submit</Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4 w-full">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder={initialName} {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="date"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Date</FormLabel>
+                  <FormControl>
+                    <Input {...field} type="date" placeholder={initialDate} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="drug"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Drugs</FormLabel>
+                  <FormControl>
+                    <Input placeholder={initialDrug.join(', ')} {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="people"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>People</FormLabel>
+                  <FormControl>
+                    <Input placeholder={initialPeople.join(', ')} {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <div className="flex justify-between">
+              <div className="flex justify-start">
+                <Button variant='outline' onClick={onCancel}>Cancel</Button>
+              </div>
+              <div className="flex justify-end">
+                <Button type="submit">Submit</Button>
+              </div>
+            </div>
+
             <div className="flex justify-center">
               {submitError ? (
                 <div className="text-red-500">{submitError}</div>

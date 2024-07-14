@@ -20,7 +20,7 @@ async function TripsContent() {
         {trips.length !== 0 ? (
           <div className="grid gap-6">
             {trips.map((trip) => (
-              <TripCard key={trip.id} trip={trip} tripId={trip.id} tripName={trip.name!} />
+              <TripCard key={trip.id} trip={trip} />
             ))}
           </div>
         ) : (

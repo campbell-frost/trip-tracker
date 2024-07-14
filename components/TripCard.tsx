@@ -3,27 +3,27 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import { Tables } from '@/types/supabase';
-import { DeleteIcon, Edit } from 'lucide-react';
+import { DeleteIcon, Edit as EditIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { Alert } from './Alert';
+import { Edit } from '@/components/Edit';
+import { Delete } from '@/components/Delete';
+
 import { useState } from 'react';
 
 interface TripCardProps {
   trip: Tables<'trips'>;
-  tripId: string;
-  tripName: string;
 }
 
-export function TripCard({ trip, tripId, tripName }: TripCardProps) {
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
-  const router = useRouter();
-  
+export function TripCard({ trip }: TripCardProps) {
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
+
   const handleDelete = () => {
-    setIsAlertOpen(true);
+    setIsDeleteOpen(true);
   };
 
   const handleEdit = () => {
-    router.push(`/trips/${tripId}/edit`);
+    setIsEditOpen(true);
   };
 
   return (
@@ -33,7 +33,7 @@ export function TripCard({ trip, tripId, tripName }: TripCardProps) {
           <span className="text-2xl font-semibold">{trip.name}</span>
           <div className="flex space-x-2">
             <Button variant={'outline'} size="icon" onClick={handleEdit}>
-              <Edit />
+              <EditIcon />
             </Button>
             <Button variant={'outline'} size="icon" onClick={handleDelete}>
               <DeleteIcon />
@@ -57,11 +57,21 @@ export function TripCard({ trip, tripId, tripName }: TripCardProps) {
           </div>
         </CardContent>
       </Card>
-      <Alert
-        tripId={tripId}
-        tripName={tripName}
-        isOpen={isAlertOpen}
-        onOpenChange={setIsAlertOpen}
+      <Edit
+        trip={{
+          id: trip.id,
+          name: trip.name || '',
+          date: trip.date || '',
+          drug: Array.isArray(trip.drug) ? trip.drug : [],
+          people: Array.isArray(trip.people) ? trip.people : []
+        }}
+        isOpen={isEditOpen}
+        onOpenChange={setIsEditOpen}
+      />
+      <Delete
+        trip={{ id: trip.id, name: trip.name || '' }}
+        isOpen={isDeleteOpen}
+        onOpenChange={setIsDeleteOpen}
       />
     </>
   );
