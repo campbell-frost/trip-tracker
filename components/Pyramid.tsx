@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 
 import * as THREE from 'three'
@@ -36,18 +36,36 @@ const Pyramid = () => {
  geometry.setIndex(new THREE.BufferAttribute(indices, 1))
  geometry.computeVertexNormals()
 
- let color = dark ? "#FFFFFF" : "#000000"
+ const color = dark ? "#FFFFFF" : "#000000"
  return (
    <mesh ref={meshRef} geometry={geometry}>
-     <meshBasicMaterial wireframe color={color} transparent opacity={0.5} />
+     <meshBasicMaterial wireframe color={color} opacity={0.5} />
    </mesh>
  )
 }
 
 const RotatingPyramid: React.FC = () => {
+  const [size, setSize] = useState({ width: 0, height: 0 })
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const updateSize = () => {
+      if (containerRef.current) {
+        const width = containerRef.current.offsetWidth
+        const height = width > 600 ? 600 : width
+        setSize({ width, height })
+        console.log(width);
+      }
+    }
+
+    updateSize()
+    window.addEventListener('resize', updateSize)
+    return () => window.removeEventListener('resize', updateSize)
+  }, [])
+
   return (
-    <div style={{ height: '400px', width: '100%' }}>
-      <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+    <div ref={containerRef} style={{ width: '100%', height: size.height }}>
+      <Canvas camera={{ position: [0, 0, 5], fov: 50 }} style={{ width: '100%', height: '100%' }}>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
         <Pyramid />
@@ -55,5 +73,6 @@ const RotatingPyramid: React.FC = () => {
     </div>
   )
 }
+
 
 export default RotatingPyramid

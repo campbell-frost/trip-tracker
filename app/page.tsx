@@ -1,3 +1,4 @@
+import React from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
@@ -20,7 +21,7 @@ export default function Page() {
                     Trip Tracker is the ultimate tool for managing your travel experiences.
                   </p>
                 </div>
-                <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                <div className="flex flex-row gap-2 min-[400px]:flex-row">
                   <Link href="/login" prefetch={false}>
                     <Button>Login</Button>
                   </Link>
@@ -29,7 +30,9 @@ export default function Page() {
                   </Link>
                 </div>
               </div>
-              <RotatingPyramid />
+              <div className="flex flex-col w-full max-w-[600px]">
+                <RotatingPyramid />
+              </div>
             </div>
           </div>
         </section>
