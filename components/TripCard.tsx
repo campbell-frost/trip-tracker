@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import { Tables } from '@/types/supabase';
 import { DeleteIcon, Edit as EditIcon } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { Edit } from '@/components/Edit';
 import { Delete } from '@/components/Delete';
 

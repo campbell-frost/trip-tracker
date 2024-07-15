@@ -20,8 +20,16 @@ interface EditProps {
   onOpenChange: (open: boolean) => void;
 }
 
+interface TripFormData {
+  name: string;
+  date: string;
+  drug: string | string[];
+  people: string | string[];
+}
+
+
 export function Edit({ trip, isOpen, onOpenChange }: EditProps) {
-  const handleEdit = async (formData: any) => {
+  const handleEdit = async (formData: TripFormData) => {
     try {
       await editTrip({
         id: trip.id,
@@ -47,7 +55,6 @@ export function Edit({ trip, isOpen, onOpenChange }: EditProps) {
           <AlertDialogTitle>Editing {trip.name}</AlertDialogTitle>
         </AlertDialogHeader>
         <TripForm
-          id={trip.id}
           initialName={trip.name}
           initialDate={trip.date}
           initialDrug={trip.drug}
