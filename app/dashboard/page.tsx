@@ -6,10 +6,10 @@ import DashboardSkeleton from '@/components/skeletons/DashboardSkeleton';
 import { checkAuth } from '@/data/checkAuth';
 
 async function TripsContent() {
+  await checkAuth();
   const trips = await getTrips();
   const supabase = await createClient();
   const { data: user } = await supabase.auth.getUser();
-  checkAuth();
 
   return (
     <div className="w-full min-h-screen bg-background py-8">
@@ -24,12 +24,12 @@ async function TripsContent() {
             ))}
           </div>
         ) : (
-          <>
+          <div>
             <h1 className="text-3xl font-bold mb-6 text-center text-foreground">No trips found.</h1>
             <h1 className="text-3xl font-bold mb-6 text-center text-foreground">
               Start adding trips by clicking on the Add Trip button above
             </h1>
-          </>
+          </div>
         )}
       </div>
     </div>
