@@ -21,7 +21,7 @@ const Pyramid = () => {
 
   const geometry = new THREE.BufferGeometry()
   const vertices = new Float32Array([
-    0,  .5,  0,   // top
+    0,  .4,  0,   // top
    -1, -1,  1,   // bottom front left
     1, -1,  1,   // bottom front right
     1, -1, -1,   // bottom back right
