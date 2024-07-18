@@ -16,13 +16,11 @@ async function TripsContent() {
           <AddTripButton />
         </div>
         {trips.length !== 0 ? (
-          <>
-            <div className="grid gap-6">
-              {trips.map((trip) => (
-                <TripCard key={trip.id} trip={trip} />
-              ))}
-            </div>
-          </>
+          <div className="grid gap-6">
+            {trips.map((trip) => (
+              <TripCard key={trip.id} trip={trip} />
+            ))}
+          </div>
         ) : (
           <div>
             <h1 className="text-3xl font-bold mb-6 text-center text-foreground">No trips found.</h1>

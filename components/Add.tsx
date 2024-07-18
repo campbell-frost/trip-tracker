@@ -51,7 +51,7 @@ export function Add({ isOpen, onOpenChange }: AddProps) {
           initialDate=""
           initialDrug={[]}
           initialPeople={[]}
-          create={false}
+          create={true}
           onSubmit={handleAdd}
           onCancel={handleCancel}
         />
