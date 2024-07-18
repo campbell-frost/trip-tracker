@@ -21,10 +21,10 @@ interface TripFormValues {
   people: string;
 }
 interface TripFormProps {
-  initialName: string;
-  initialDate: string;
-  initialDrug: string[];
-  initialPeople: string[];
+  initialName?: string;
+  initialDate?: string;
+  initialDrug?: string[];
+  initialPeople?: string[];
   create: boolean;
   onSubmit: (values: TripFormValues) => Promise<void>;
   onCancel: () => void;
@@ -43,10 +43,10 @@ export default function TripForm({
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const form = useForm<TripFormValues>({
     defaultValues: {
-      name: initialName,
-      date: initialDate,
-      drug: initialDrug.join(', '),
-      people: initialPeople.join(', '),
+      name: initialName || '',
+      date: initialDate || '',
+      drug: initialDrug ? initialDrug.join(', ') : '',
+      people: initialPeople ? initialPeople.join(', ') : '',
     },
   });
 
@@ -104,7 +104,7 @@ export default function TripForm({
                 <FormItem>
                   <FormLabel>Drugs</FormLabel>
                   <FormControl>
-                    <Input placeholder={initialDrug.join(', ')} {...field} />
+                    <Input placeholder={initialDrug?.join(', ')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -117,7 +117,7 @@ export default function TripForm({
                 <FormItem>
                   <FormLabel>People</FormLabel>
                   <FormControl>
-                    <Input placeholder={initialPeople.join(', ')} {...field} />
+                    <Input placeholder={initialPeople?.join(', ')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -126,7 +126,7 @@ export default function TripForm({
 
             <div className="flex justify-between">
               <div className="flex justify-start">
-                <Button variant='outline' onClick={onCancel}>Cancel</Button>
+                <Button type="button" variant='outline' onClick={onCancel}>Cancel</Button>
               </div>
               <div className="flex justify-end">
                 <Button type="submit">Submit</Button>
