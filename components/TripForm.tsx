@@ -20,6 +20,7 @@ interface TripFormValues {
   drug: string;
   people: string;
 }
+
 interface TripFormProps {
   initialName?: string;
   initialDate?: string;
@@ -41,6 +42,7 @@ export default function TripForm({
   }: TripFormProps) {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  
   const form = useForm<TripFormValues>({
     defaultValues: {
       name: initialName || '',

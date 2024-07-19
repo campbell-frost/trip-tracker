@@ -4,7 +4,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import { Tables } from '@/types/supabase';
-import { DeleteIcon, Edit as EditIcon } from 'lucide-react';
+import { Trash2, Edit as EditIcon } from 'lucide-react';
 import { Edit } from '@/components/Edit';
 import { Delete } from '@/components/Delete';
 
@@ -36,7 +36,7 @@ export function TripCard({ trip }: TripCardProps) {
               <EditIcon />
             </Button>
             <Button variant={'outline'} size="icon" onClick={handleDelete}>
-              <DeleteIcon />
+              <Trash2 />
             </Button>
           </div>
         </CardTitle>
