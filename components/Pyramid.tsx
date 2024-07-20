@@ -66,9 +66,7 @@ const RotatingPyramid: React.FC = () => {
 
   return (
     <div ref={containerRef} style={{ width: '100%', height: size.height }}>
-      <Canvas camera={{ position: [0, 0, 5], fov: 50 }} style={{ width: '100%', height: '100%' }}>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} />
+      <Canvas camera={{ position: [0, 0, 3] }} style={{ width: '100%', height: '100%' }}>
         <Pyramid />
       </Canvas>
     </div>
