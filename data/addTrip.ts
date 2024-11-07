@@ -5,7 +5,7 @@ import { createClient } from '@/utils/supabase/server';
 interface addTripProps {
   name: string;
   date: string;
-  drug: string;
+  substances: string;
   people: string;
 }
 
@@ -16,7 +16,7 @@ export async function addTrip(formData: addTripProps) {
   const data = {
     name: formData.name,
     date: formData.date,
-    drug: formData.drug.split(',').map((item) => item.trim()),
+    substances: formData.substances.split(',').map((item) => item.trim()),
     people: formData.people.split(',').map((item) => item.trim()),
     user_id: user.user?.id,
   };

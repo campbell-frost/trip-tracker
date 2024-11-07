@@ -17,14 +17,14 @@ import { useState } from 'react';
 interface TripFormValues {
   name: string;
   date: string;
-  drug: string;
+  substances: string;
   people: string;
 }
 
 interface TripFormProps {
   initialName?: string;
   initialDate?: string;
-  initialDrug?: string[];
+  initialSubstances?: string[];
   initialPeople?: string[];
   create: boolean;
   onSubmit: (values: TripFormValues) => Promise<void>;
@@ -34,7 +34,7 @@ interface TripFormProps {
 export default function TripForm({
     initialName,
     initialDate,
-    initialDrug,
+    initialSubstances,
     initialPeople,
     create,
     onSubmit,
@@ -47,7 +47,7 @@ export default function TripForm({
     defaultValues: {
       name: initialName || '',
       date: initialDate || '',
-      drug: initialDrug ? initialDrug.join(', ') : '',
+      substances: initialSubstances ? initialSubstances.join(', ') : '',
       people: initialPeople ? initialPeople.join(', ') : '',
     },
   });
@@ -101,12 +101,12 @@ export default function TripForm({
             />
             <FormField
               control={form.control}
-              name="drug"
+              name="substances"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Drugs</FormLabel>
+                  <FormLabel>Substances</FormLabel>
                   <FormControl>
-                    <Input placeholder={initialDrug?.join(', ')} {...field} />
+                    <Input placeholder={initialSubstances?.join(', ')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

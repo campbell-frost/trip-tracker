@@ -9,38 +9,11 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      oldTrips: {
-        Row: {
-          date: string | null
-          drug: string[] | null
-          id: number
-          name: string | null
-          people: string[] | null
-          user_id: string | null
-        }
-        Insert: {
-          date?: string | null
-          drug?: string[] | null
-          id?: number
-          name?: string | null
-          people?: string[] | null
-          user_id?: string | null
-        }
-        Update: {
-          date?: string | null
-          drug?: string[] | null
-          id?: number
-          name?: string | null
-          people?: string[] | null
-          user_id?: string | null
-        }
-        Relationships: []
-      }
       trips: {
         Row: {
           created_at: string
           date: string | null
-          drug: string[] | null
+          substances: string[] | null
           id: string
           name: string | null
           people: string[] | null
@@ -49,7 +22,7 @@ export type Database = {
         Insert: {
           created_at?: string
           date?: string | null
-          drug?: string[] | null
+          substances?: string[] | null
           id?: string
           name?: string | null
           people?: string[] | null
@@ -58,7 +31,7 @@ export type Database = {
         Update: {
           created_at?: string
           date?: string | null
-          drug?: string[] | null
+          substances?: string[] | null
           id?: string
           name?: string | null
           people?: string[] | null

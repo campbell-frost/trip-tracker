@@ -52,7 +52,7 @@ export function TripCard({ trip }: TripCardProps) {
             </div>
             <div>
               <p className="text-sm font-medium text-muted-foreground">Substances</p>
-              <p className="text-lg text-card-foreground">{trip.drug?.join(', ') || 'None'}</p>
+              <p className="text-lg text-card-foreground">{trip.substances?.join(', ') || 'None'}</p>
             </div>
           </div>
         </CardContent>
@@ -62,7 +62,7 @@ export function TripCard({ trip }: TripCardProps) {
           id: trip.id,
           name: trip.name || '',
           date: trip.date || '',
-          drug: Array.isArray(trip.drug) ? trip.drug : [],
+          substances: Array.isArray(trip.substances) ? trip.substances : [],
           people: Array.isArray(trip.people) ? trip.people : []
         }}
         isOpen={isEditOpen}

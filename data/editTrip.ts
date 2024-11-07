@@ -5,7 +5,7 @@ import { createClient } from '@/utils/supabase/server';
 interface editTripProps {
     name: string;
     date: string;
-    drug: string;
+    substances: string;
     people: string;
     id: string; 
 }
@@ -17,7 +17,7 @@ export async function editTrip(trip: editTripProps) {
     .update({
       name:trip.name,
       date: trip.date,
-      drug: trip.drug.split(',').map((item) => item.trim()),
+      substances: trip.substances.split(',').map((item) => item.trim()),
       people: trip.people.split(',').map((item) => item.trim()),
     })
     .eq('id', trip.id);

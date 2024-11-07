@@ -16,9 +16,9 @@ interface AddProps {
 interface TripFormData {
   name: string;
   date: string;
-  drug: string | string[];
+  substances: string | string[];
   people: string | string[];
-}
+} 
 
 export function Add({ isOpen, onOpenChange }: AddProps) {
   const handleAdd = async (formData: TripFormData) => {
@@ -26,7 +26,7 @@ export function Add({ isOpen, onOpenChange }: AddProps) {
       await addTrip({
         name: formData.name,
         date: formData.date,
-        drug: Array.isArray(formData.drug) ? formData.drug.join(', ') : formData.drug,
+        substances: Array.isArray(formData.substances) ? formData.substances.join(', ') : formData.substances,
         people: Array.isArray(formData.people) ? formData.people.join(', ') : formData.people,
       });
       onOpenChange(false);
@@ -49,7 +49,7 @@ export function Add({ isOpen, onOpenChange }: AddProps) {
         <TripForm
           initialName=""
           initialDate=""
-          initialDrug={[]}
+          initialSubstances={[]}
           initialPeople={[]}
           create={true}
           onSubmit={handleAdd}

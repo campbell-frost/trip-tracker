@@ -12,7 +12,7 @@ interface EditProps {
   trip: {
     name: string;
     date: string;
-    drug: string[];
+    substances: string[];
     people: string[];
     id: string;
   };
@@ -23,7 +23,7 @@ interface EditProps {
 interface TripFormData {
   name: string;
   date: string;
-  drug: string | string[];
+  substances: string | string[];
   people: string | string[];
 }
 
@@ -35,7 +35,7 @@ export function Edit({ trip, isOpen, onOpenChange }: EditProps) {
         id: trip.id,
         name: formData.name,
         date: formData.date,
-        drug: Array.isArray(formData.drug) ? formData.drug.join(', ') : formData.drug,
+        substances: Array.isArray(formData.substances) ? formData.substances.join(', ') : formData.substances,
         people: Array.isArray(formData.people) ? formData.people.join(', ') : formData.people,
       });
       onOpenChange(false);
@@ -57,7 +57,7 @@ export function Edit({ trip, isOpen, onOpenChange }: EditProps) {
         <TripForm
           initialName={trip.name}
           initialDate={trip.date}
-          initialDrug={trip.drug}
+          initialSubstances={trip.substances}
           initialPeople={trip.people}
           create={false}
           onSubmit={handleEdit}
